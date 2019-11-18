@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_move_Script : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Player_move_Script : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+    public int jewels;
+    private AudioSource eGem;
+    public Text jewelsText;
 
 
 
@@ -26,6 +30,7 @@ public class Player_move_Script : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        
 
     }
 
@@ -65,8 +70,23 @@ public class Player_move_Script : MonoBehaviour
 
 
     }
-    
-    
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "jewel")
+        {
+            Destroy(col.gameObject);
+            jewels++;
+            jewelsText.text = "Jewels " + jewels;
+
+
+
+        }
+
+
+
+    }
+
 
 }
 
